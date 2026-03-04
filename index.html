@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REPrieve — The AI Compliance OS for Behavioral Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #1A56E8;
+  --blue-dark: #1240C0;
+  --blue-light: #EEF3FE;
+  --blue-mid: #C8D9FB;
+  --navy: #0C1C3E;
+  --navy-border: rgba(255,255,255,0.08);
+  --text: #111827;
+  --muted: #6B7280;
+  --light-border: #E5E7EB;
+  --off-white: #F9FAFB;
+  --white: #FFFFFF;
+  --green: #10B981;
+  --amber: #F59E0B;
+  --teal: #0ABFBC;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Manrope', sans-serif; color: var(--text); background: var(--white); line-height: 1.6; overflow-x: hidden; }
+
+/* NAV */
+nav { position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--light-border);padding:0 60px;height:68px;display:flex;align-items:center;justify-content:space-between; }
+.nav-logo { display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:var(--navy);text-decoration:none;letter-spacing:-0.4px; }
+.logo-mark { width:34px;height:34px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:14px;font-weight:800; }
+.nav-links { display:flex;align-items:center;gap:36px;list-style:none; }
+.nav-links a { text-decoration:none;font-size:14px;font-weight:600;color:var(--muted);transition:color 0.2s; }
+.nav-links a:hover { color:var(--navy); }
+.nav-cta { background:var(--blue)!important;color:white!important;padding:10px 22px;border-radius:8px;font-size:14px!important;font-weight:700!important;transition:all 0.2s!important; }
+.nav-cta:hover { background:var(--blue-dark)!important;transform:translateY(-1px)!important; }
+
+/* HERO */
+.hero { padding:140px 60px 80px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center; }
+.hero-badge { display:inline-flex;align-items:center;gap:8px;background:var(--blue-light);color:var(--blue);border:1px solid var(--blue-mid);padding:5px 14px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:28px; }
+.badge-dot { width:6px;height:6px;background:var(--blue);border-radius:50%;animation:blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+.hero h1 { font-family:'Playfair Display',serif;font-size:clamp(38px,4vw,56px);line-height:1.1;letter-spacing:-1px;color:var(--navy);margin-bottom:20px; }
+.hero h1 em { font-style:italic;color:var(--blue); }
+.hero-sub { font-size:16px;color:var(--muted);line-height:1.75;margin-bottom:36px;max-width:460px;font-weight:400; }
+.hero-btns { display:flex;gap:12px;flex-wrap:wrap; }
+.btn-primary { background:var(--blue);color:white;padding:13px 24px;border-radius:9px;font-size:14px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;font-family:'Manrope',sans-serif;border:none;cursor:pointer; }
+.btn-primary:hover { background:var(--blue-dark);transform:translateY(-1px);box-shadow:0 8px 28px rgba(26,86,232,0.35); }
+.btn-secondary { background:white;color:var(--navy);padding:13px 24px;border-radius:9px;font-size:14px;font-weight:700;text-decoration:none;border:1.5px solid var(--light-border);display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;font-family:'Manrope',sans-serif;cursor:pointer; }
+.btn-secondary:hover { border-color:var(--blue);color:var(--blue);transform:translateY(-1px); }
+
+/* HERO MOCKUP */
+.hero-mockup { background:var(--navy);border-radius:16px;overflow:hidden;box-shadow:0 40px 80px rgba(12,28,62,0.35),0 0 0 1px rgba(255,255,255,0.05); }
+.mockup-topbar { background:rgba(255,255,255,0.04);border-bottom:1px solid var(--navy-border);padding:10px 14px;display:flex;align-items:center;gap:7px; }
+.mdot { width:9px;height:9px;border-radius:50%; }
+.mdot-r{background:#FF5F57;} .mdot-y{background:#FEBC2E;} .mdot-g{background:#28C840;}
+.mockup-label { margin-left:10px;font-size:11px;color:rgba(255,255,255,0.35);font-weight:500; }
+.mockup-inner { display:grid;grid-template-columns:165px 1fr; }
+.mock-sidebar { background:rgba(0,0,0,0.25);border-right:1px solid var(--navy-border);padding:16px 0; }
+.mock-org { padding:0 14px 14px;border-bottom:1px solid var(--navy-border);margin-bottom:8px; }
+.mock-org-name { color:white;font-size:11px;font-weight:700; }
+.mock-org-sub { color:rgba(255,255,255,0.35);font-size:9px;margin-top:2px; }
+.mock-nav { padding:7px 14px;font-size:10px;font-weight:600;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:8px;cursor:pointer;transition:all 0.15s; }
+.mock-nav.active { background:rgba(26,86,232,0.18);color:white;border-right:2px solid var(--blue); }
+.ndot { width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.2); }
+.ndot.active { background:var(--blue); }
+.mock-main { padding:18px;background:rgba(255,255,255,0.02); }
+.mock-hdr { display:flex;justify-content:space-between;align-items:center;margin-bottom:14px; }
+.mock-hdr h4 { font-size:12px;font-weight:700;color:white; }
+.all-clear { background:#052e16;color:#34d399;border:1px solid #065f46;padding:2px 9px;border-radius:100px;font-size:10px;font-weight:700; }
+.score-grid { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px; }
+.score-card { background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.07);border-radius:9px;padding:11px; }
+.score-lbl { font-size:9px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px; }
+.score-val { font-size:20px;font-weight:800;color:white;line-height:1;margin-bottom:6px; }
+.score-val.g{color:#34d399;} .score-val.a{color:#fbbf24;}
+.prog { height:3px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden; }
+.prog-fill { height:100%;border-radius:2px;background:var(--blue); }
+.prog-fill.g{background:#34d399;} .prog-fill.a{background:#fbbf24;}
+.agent-strip { background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.07);border-radius:9px;padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:8px; }
+.agent-ico { width:26px;height:26px;border-radius:7px;background:rgba(26,86,232,0.35);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0; }
+.agent-nm { font-size:10px;font-weight:700;color:white; }
+.agent-st { font-size:9px;color:rgba(255,255,255,0.4);margin-top:1px; }
+.pill { margin-left:auto;padding:2px 8px;border-radius:100px;font-size:9px;font-weight:700; }
+.pill-w{background:#451a03;color:#fb923c;} .pill-ok{background:#052e16;color:#34d399;}
+.mini-chart { margin-top:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:9px;padding:10px; }
+.mini-chart-lbl { font-size:9px;color:rgba(255,255,255,0.3);font-weight:600;margin-bottom:8px; }
+.chart-bars { display:flex;align-items:flex-end;gap:4px;height:36px; }
+.bar { border-radius:3px 3px 0 0;flex:1;background:rgba(26,86,232,0.35); }
+.bar.hi{background:var(--blue);}
+
+/* TRUSTED */
+.trusted-strip { background:var(--off-white);border-top:1px solid var(--light-border);border-bottom:1px solid var(--light-border);padding:28px 60px;text-align:center; }
+.trusted-lbl { font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:20px; }
+.trusted-row { display:flex;justify-content:center;align-items:center;gap:52px;flex-wrap:wrap; }
+.trusted-name { font-size:14px;font-weight:700;color:#D1D5DB; }
+
+/* STATS */
+.stats-section { padding:64px 60px;max-width:1200px;margin:0 auto; }
+.stats-row { display:grid;grid-template-columns:repeat(4,1fr); }
+.stat-box { text-align:center;padding:0 32px;border-right:1px solid var(--light-border); }
+.stat-box:last-child{border-right:none;}
+.stat-num { font-family:'Playfair Display',serif;font-size:48px;color:var(--blue);line-height:1;margin-bottom:8px; }
+.stat-lbl { font-size:13px;color:var(--muted);font-weight:500; }
+
+/* DARK PLATFORM */
+.platform-dark { background:var(--navy);padding:96px 60px; }
+.platform-inner { max-width:1200px;margin:0 auto; }
+.platform-tag { font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--teal);margin-bottom:14px; }
+.platform-h { font-family:'Playfair Display',serif;font-size:clamp(30px,3.5vw,46px);color:white;line-height:1.15;letter-spacing:-0.5px;margin-bottom:14px; }
+.platform-sub { font-size:16px;color:rgba(255,255,255,0.5);max-width:560px;line-height:1.75;margin-bottom:56px; }
+.modules-grid { display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--navy-border);border-radius:16px;overflow:hidden;margin-bottom:28px; }
+.mod-card { background:rgba(255,255,255,0.03);padding:28px 24px;transition:background 0.25s;border-right:1px solid var(--navy-border);border-bottom:1px solid var(--navy-border); }
+.mod-card:hover{background:rgba(26,86,232,0.12);}
+.mod-card:nth-child(3n){border-right:none;}
+.mod-card:nth-last-child(-n+3){border-bottom:none;}
+.mod-icon { width:40px;height:40px;border-radius:9px;background:rgba(26,86,232,0.25);display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:12px; }
+.mod-title { font-size:14px;font-weight:800;color:white;margin-bottom:6px; }
+.mod-desc { font-size:11px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:12px; }
+.mod-feats { list-style:none;display:flex;flex-direction:column;gap:4px; }
+.mod-feats li { font-size:10px;color:rgba(255,255,255,0.35);display:flex;align-items:center;gap:6px; }
+.mod-feats li::before { content:'';width:4px;height:4px;background:var(--teal);border-radius:50%;flex-shrink:0; }
+.platform-btns { display:flex;gap:12px;flex-wrap:wrap; }
+.btn-teal { background:var(--teal);color:white;padding:12px 22px;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;font-family:'Manrope',sans-serif; }
+.btn-teal:hover{opacity:0.9;transform:translateY(-1px);}
+.btn-outline-w { background:transparent;color:white;padding:12px 22px;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none;border:1.5px solid rgba(255,255,255,0.2);display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;font-family:'Manrope',sans-serif; }
+.btn-outline-w:hover{border-color:white;transform:translateY(-1px);}
+
+/* SCREENS */
+.screens-section { background:var(--navy);padding:0 60px 96px; }
+.screens-inner { max-width:1200px;margin:0 auto; }
+.screens-header { text-align:center;padding-bottom:40px; }
+.screens-grid { display:grid;grid-template-columns:1fr 1fr;gap:24px; }
+.screen-frame { background:rgba(255,255,255,0.04);border:1px solid var(--navy-border);border-radius:14px;overflow:hidden; }
+.screen-topbar { background:rgba(0,0,0,0.3);border-bottom:1px solid var(--navy-border);padding:10px 14px;display:flex;align-items:center;gap:6px; }
+.sdot{width:8px;height:8px;border-radius:50%;} .sdot-r{background:#FF5F57;} .sdot-y{background:#FEBC2E;} .sdot-g{background:#28C840;}
+.screen-title-bar { margin-left:10px;font-size:10px;color:rgba(255,255,255,0.3);font-weight:500; }
+.screen-body { padding:16px; }
+.screen-cap { padding:0 16px 16px; }
+.screen-cap-title { font-size:13px;font-weight:800;color:white;margin-bottom:4px; }
+.screen-cap-text { font-size:11px;color:rgba(255,255,255,0.4);line-height:1.5; }
+.s-lbl { font-size:9px;font-weight:700;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px; }
+.comp-row { display:flex;align-items:center;justify-content:space-between;margin-bottom:10px; }
+.comp-name { font-size:10px;color:rgba(255,255,255,0.6);font-weight:600;width:110px; }
+.comp-bar-wrap { flex:1;margin:0 12px;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden; }
+.comp-fill { height:100%;border-radius:2px; }
+.comp-pct { font-size:10px;font-weight:700;color:rgba(255,255,255,0.7);width:32px;text-align:right; }
+.comp-events { margin-top:12px; }
+.comp-e-lbl { font-size:9px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,0.2);letter-spacing:0.5px;margin-bottom:6px; }
+.comp-event { font-size:9px;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:6px;margin-bottom:4px; }
+.comp-event::before { content:'';width:4px;height:4px;background:var(--teal);border-radius:50%;flex-shrink:0; }
+.wf-step { padding:9px 14px;border-radius:7px;font-size:11px;font-weight:700;text-align:center;margin-bottom:6px;border:1px solid rgba(255,255,255,0.06);color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.03); }
+.wf-step.done{background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.25);color:#34d399;}
+.wf-step.active{background:rgba(26,86,232,0.2);border-color:rgba(26,86,232,0.4);color:white;}
+.wf-conn { text-align:center;color:rgba(255,255,255,0.15);font-size:10px;margin-bottom:6px; }
+.pol-row { background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:9px 12px;margin-bottom:7px;display:flex;align-items:center;gap:10px; }
+.pol-name { font-size:10px;font-weight:700;color:white; }
+.pol-meta { font-size:9px;color:rgba(255,255,255,0.35);margin-top:1px; }
+.pol-status { margin-left:auto;padding:2px 8px;border-radius:100px;font-size:9px;font-weight:700; }
+.ps-ok{background:#052e16;color:#34d399;} .ps-due{background:#451a03;color:#fb923c;}
+.evid-row { background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:9px 12px;margin-bottom:7px;display:flex;align-items:center;gap:10px; }
+.evid-type { font-size:10px;font-weight:800;color:var(--teal);width:40px;flex-shrink:0; }
+.evid-name { font-size:10px;font-weight:600;color:rgba(255,255,255,0.7); }
+.evid-count { margin-left:auto;font-size:9px;color:rgba(255,255,255,0.3); }
+
+/* HOW IT WORKS */
+.hiw { padding:96px 60px;background:var(--off-white); }
+.hiw-inner { max-width:1200px;margin:0 auto; }
+.hiw-steps { display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:60px;position:relative; }
+.hiw-steps::before { content:'';position:absolute;top:27px;left:calc(12.5% + 14px);width:calc(75% - 28px);height:2px;background:linear-gradient(90deg,var(--blue),var(--blue-mid));z-index:0; }
+.hiw-step { text-align:center;padding:0 20px;position:relative;z-index:1; }
+.hiw-num { width:54px;height:54px;border-radius:50%;background:var(--blue);color:white;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;margin:0 auto 20px;border:3px solid white;box-shadow:0 0 0 2px var(--blue); }
+.hiw-title { font-size:14px;font-weight:800;color:var(--navy);margin-bottom:8px; }
+.hiw-desc { font-size:12px;color:var(--muted);line-height:1.6; }
+
+/* WHY */
+.why { padding:96px 60px; }
+.why-inner { max-width:1200px;margin:0 auto; }
+.why-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:56px; }
+.why-card { background:white;border:1px solid var(--light-border);border-radius:14px;padding:32px;transition:all 0.25s; }
+.why-card:hover{border-color:var(--blue);box-shadow:0 12px 40px rgba(26,86,232,0.08);transform:translateY(-2px);}
+.why-icon { width:44px;height:44px;background:var(--blue-light);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px; }
+.why-title { font-size:16px;font-weight:800;color:var(--navy);margin-bottom:8px; }
+.why-desc { font-size:13px;color:var(--muted);line-height:1.75; }
+
+/* SECTION HEADERS */
+.sec-tag { font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--blue);margin-bottom:14px; }
+.sec-h { font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,44px);line-height:1.15;letter-spacing:-0.5px;color:var(--navy);margin-bottom:14px; }
+.sec-sub { font-size:16px;color:var(--muted);max-width:560px;line-height:1.75;font-weight:400; }
+
+/* RESULTS */
+.results { padding:96px 60px;background:var(--off-white); }
+.results-inner { max-width:1200px;margin:0 auto; }
+.results-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px; }
+.result-card { background:white;border:1.5px solid var(--light-border);border-radius:14px;padding:40px 32px;text-align:center;transition:all 0.25s; }
+.result-card:hover{border-color:var(--blue);box-shadow:0 12px 40px rgba(26,86,232,0.08);}
+.result-num { font-family:'Playfair Display',serif;font-size:52px;color:var(--blue);line-height:1;margin-bottom:8px; }
+.result-label { font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px; }
+.result-org { font-size:12px;color:var(--blue);font-weight:600; }
+
+/* TESTI */
+.testi { padding:96px 60px; }
+.testi-inner { max-width:1200px;margin:0 auto; }
+.testi-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px; }
+.testi-card { background:white;border:1px solid var(--light-border);border-radius:14px;padding:28px; }
+.testi-q { font-family:'Playfair Display',serif;font-size:40px;color:var(--blue-mid);line-height:1;margin-bottom:12px; }
+.testi-text { font-size:14px;color:var(--text);line-height:1.75;margin-bottom:20px;font-style:italic; }
+.testi-author { font-size:13px;font-weight:800;color:var(--navy); }
+.testi-role { font-size:12px;color:var(--muted);margin-top:2px; }
+
+/* CTA */
+.cta { padding:96px 60px; }
+.cta-inner { max-width:1200px;margin:0 auto; }
+.cta-box { background:var(--navy);border-radius:20px;padding:72px;position:relative;overflow:hidden;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center; }
+.cta-box::before { content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(26,86,232,0.2) 0%,transparent 70%);pointer-events:none; }
+.cta-h { font-family:'Playfair Display',serif;font-size:clamp(26px,3vw,38px);color:white;line-height:1.2;letter-spacing:-0.5px;margin-bottom:12px; }
+.cta-sub { font-size:15px;color:rgba(255,255,255,0.55);line-height:1.7; }
+.cta-actions { display:flex;gap:12px;flex-shrink:0;flex-direction:column; }
+.btn-white { background:white;color:var(--blue);padding:14px 24px;border-radius:9px;font-size:14px;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;font-family:'Manrope',sans-serif; }
+.btn-white:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,0.2);}
+.btn-ghost { background:transparent;color:white;padding:14px 24px;border-radius:9px;font-size:14px;font-weight:700;text-decoration:none;border:1.5px solid rgba(255,255,255,0.25);display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;font-family:'Manrope',sans-serif; }
+.btn-ghost:hover{border-color:rgba(255,255,255,0.7);transform:translateY(-1px);}
+
+/* FOOTER */
+footer { background:var(--navy);border-top:1px solid var(--navy-border);padding:64px 60px 36px; }
+.footer-inner { max-width:1200px;margin:0 auto; }
+.footer-grid { display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px; }
+.footer-brand { display:flex;align-items:center;gap:10px;margin-bottom:12px; }
+.footer-brand-text { font-size:17px;font-weight:800;color:white; }
+.footer-desc { font-size:12px;color:rgba(255,255,255,0.4);line-height:1.6;max-width:240px;margin-bottom:20px; }
+.footer-badges { display:flex;gap:8px;flex-wrap:wrap; }
+.fbadge { background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.5);padding:4px 10px;border-radius:6px;font-size:10px;font-weight:700;border:1px solid rgba(255,255,255,0.08); }
+.footer-col h5 { font-size:11px;font-weight:800;color:white;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px; }
+.footer-col ul { list-style:none;display:flex;flex-direction:column;gap:10px; }
+.footer-col a { font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.2s; }
+.footer-col a:hover{color:white;}
+.footer-bottom { border-top:1px solid var(--navy-border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(255,255,255,0.3); }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+.fu{animation:fadeUp 0.65s ease forwards;opacity:0;}
+.fu-1{animation-delay:0.05s} .fu-2{animation-delay:0.15s} .fu-3{animation-delay:0.25s} .fu-4{animation-delay:0.35s} .fu-5{animation-delay:0.45s}
+
+@media(max-width:900px){
+  nav{padding:0 20px;} .nav-links{display:none;}
+  .hero{grid-template-columns:1fr;padding:120px 24px 60px;gap:48px;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .stat-box:nth-child(even){border-right:none;}
+  .modules-grid{grid-template-columns:1fr;} .mod-card{border-right:none!important;}
+  .screens-grid,.why-grid,.results-grid,.testi-grid{grid-template-columns:1fr;}
+  .hiw-steps{grid-template-columns:1fr 1fr;} .hiw-steps::before{display:none;}
+  .cta-box{grid-template-columns:1fr;padding:48px 28px;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .platform-dark,.screens-section,.hiw,.why,.results,.testi,.cta{padding:64px 24px;}
+  .trusted-strip,.stats-section{padding:40px 24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"><div class="logo-mark">R</div>REPrieve</a>
+  <ul class="nav-links">
+    <li><a href="#">Platform</a></li>
+    <li><a href="#">AI Agents</a></li>
+    <li><a href="#">How It Works</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#" class="nav-cta">Request Demo</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section>
+<div class="hero">
+  <div class="fu fu-1">
+    <div class="hero-badge"><div class="badge-dot"></div>Built for Arizona Behavioral Health</div>
+    <h1 class="fu fu-2">Compliance isn't<br>a checkbox.<br><em>It's a system.</em></h1>
+    <p class="hero-sub fu fu-3">REPrieve is the AI-powered compliance operating system for behavioral health organizations — built to stay audit-ready, protect patients, and eliminate compliance guesswork for good.</p>
+    <div class="hero-btns fu fu-4">
+      <a href="#" class="btn-primary">Request a Demo <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 6.5h11M7.5 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="#" class="btn-secondary">Try Interactive Demo <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M4.5 2l5 4.5-5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+
+  <div class="hero-mockup fu fu-5">
+    <div class="mockup-topbar">
+      <div class="mdot mdot-r"></div><div class="mdot mdot-y"></div><div class="mdot mdot-g"></div>
+      <span class="mockup-label">REPrieve — Compliance Command Center</span>
+    </div>
+    <div class="mockup-inner">
+      <div class="mock-sidebar">
+        <div class="mock-org"><div class="mock-org-name">Cholla Behavioral Health</div><div class="mock-org-sub">Phoenix, AZ · AHCCCS Provider</div></div>
+        <div class="mock-nav active"><div class="ndot active"></div>Compliance Overview</div>
+        <div class="mock-nav"><div class="ndot"></div>Policy Manager</div>
+        <div class="mock-nav"><div class="ndot"></div>Evidence Library</div>
+        <div class="mock-nav"><div class="ndot"></div>AI Agents</div>
+        <div class="mock-nav"><div class="ndot"></div>Audit Trails</div>
+        <div class="mock-nav"><div class="ndot"></div>Training & CEUs</div>
+        <div class="mock-nav"><div class="ndot"></div>QM Reports</div>
+      </div>
+      <div class="mock-main">
+        <div class="mock-hdr"><h4>Compliance Overview — Q1 2026</h4><span class="all-clear">✓ Audit Ready</span></div>
+        <div class="score-grid">
+          <div class="score-card"><div class="score-lbl">HIPAA Privacy</div><div class="score-val g">98%</div><div class="prog"><div class="prog-fill g" style="width:98%"></div></div></div>
+          <div class="score-card"><div class="score-lbl">42 CFR Part 2</div><div class="score-val">95%</div><div class="prog"><div class="prog-fill" style="width:95%"></div></div></div>
+          <div class="score-card"><div class="score-lbl">CARF Standards</div><div class="score-val a">88%</div><div class="prog"><div class="prog-fill a" style="width:88%"></div></div></div>
+          <div class="score-card"><div class="score-lbl">AHCCCS Licensing</div><div class="score-val g">100%</div><div class="prog"><div class="prog-fill g" style="width:100%"></div></div></div>
+        </div>
+        <div class="agent-strip">
+          <div class="agent-ico">🛡️</div>
+          <div><div class="agent-nm">Policy Guardian</div><div class="agent-st">3 policies due for review · Mar 15</div></div>
+          <span class="pill pill-w">Action Needed</span>
+        </div>
+        <div class="mini-chart">
+          <div class="mini-chart-lbl">Compliance Score Trend — Last 6 Months</div>
+          <div class="chart-bars">
+            <div class="bar" style="height:55%"></div><div class="bar" style="height:62%"></div>
+            <div class="bar" style="height:70%"></div><div class="bar" style="height:78%"></div>
+            <div class="bar hi" style="height:88%"></div><div class="bar hi" style="height:96%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- TRUSTED -->
+<div class="trusted-strip">
+  <div class="trusted-lbl">Trusted by Arizona Behavioral Health Organizations</div>
+  <div class="trusted-row">
+    <span class="trusted-name">Cholla Behavioral Health</span>
+    <span class="trusted-name">Sanctuary Recovery Centers</span>
+    <span class="trusted-name">NorthSight Recovery</span>
+    <span class="trusted-name">BrightPath Arizona</span>
+    <span class="trusted-name">Desert Hope Network</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-num">4</div><div class="stat-lbl">Specialized AI Compliance Agents</div></div>
+    <div class="stat-box"><div class="stat-num">90%</div><div class="stat-lbl">Reduction in Audit Prep Time</div></div>
+    <div class="stat-box"><div class="stat-num">100%</div><div class="stat-lbl">AHCCCS & CARF Framework Coverage</div></div>
+    <div class="stat-box"><div class="stat-num">24/7</div><div class="stat-lbl">Automated Compliance Monitoring</div></div>
+  </div>
+</div>
+
+<!-- DARK MODULES -->
+<section class="platform-dark">
+  <div class="platform-inner">
+    <div class="platform-tag">The Platform</div>
+    <h2 class="platform-h">Everything compliance needs.<br>Integrated. Intelligent. Always on.</h2>
+    <p class="platform-sub">Purpose-built modules across compliance, clinical governance, workforce credentials, and quality management — all sharing one source of truth.</p>
+    <div class="modules-grid">
+      <div class="mod-card"><div class="mod-icon">🛡️</div><div class="mod-title">Policy Guardian</div><div class="mod-desc">AI-powered policy management keeping every document current, version-controlled, and regulatory-aligned.</div><ul class="mod-feats"><li>Policy authoring & version control</li><li>Regulatory change monitoring</li><li>Staff attestation tracking</li><li>9 A.A.C. 10 alignment</li></ul></div>
+      <div class="mod-card"><div class="mod-icon">📊</div><div class="mod-title">Compliance Monitor</div><div class="mod-desc">Real-time compliance scoring across every framework — HIPAA, 42 CFR Part 2, CARF, AHCCCS. Always audit-ready.</div><ul class="mod-feats"><li>HIPAA & 42 CFR Part 2 tracking</li><li>CARF & Joint Commission readiness</li><li>Automated alerts & escalations</li><li>Multi-site compliance view</li></ul></div>
+      <div class="mod-card"><div class="mod-icon">📚</div><div class="mod-title">Evidence Librarian</div><div class="mod-desc">Centralized, AI-organized evidence repository — instantly retrievable for any audit or accreditation review.</div><ul class="mod-feats"><li>Document intake & classification</li><li>Evidence mapping to standards</li><li>One-click audit package generation</li><li>Retention schedule management</li></ul></div>
+      <div class="mod-card"><div class="mod-icon">⚙️</div><div class="mod-title">QM Orchestrator</div><div class="mod-desc">Quality management automation connecting clinical outcomes to compliance performance across your organization.</div><ul class="mod-feats"><li>QI committee meeting support</li><li>Performance indicator tracking</li><li>Corrective action workflows</li><li>ASAM outcomes reporting</li></ul></div>
+      <div class="mod-card"><div class="mod-icon">🎓</div><div class="mod-title">Training & Credentials</div><div class="mod-desc">Staff compliance training, CEU tracking, and credential management in one integrated, automated system.</div><ul class="mod-feats"><li>Required training assignment</li><li>CEU tracking & deadline alerts</li><li>License expiration monitoring</li><li>Completion audit trails</li></ul></div>
+      <div class="mod-card"><div class="mod-icon">🔒</div><div class="mod-title">Audit Trail Engine</div><div class="mod-desc">Immutable, HIPAA-compliant logging across every user action, document change, and system event.</div><ul class="mod-feats"><li>Tamper-proof activity logs</li><li>PHI disclosure tracking</li><li>User access history</li><li>Exportable compliance reports</li></ul></div>
+    </div>
+    <div class="platform-btns">
+      <a href="#" class="btn-teal">Explore All Modules →</a>
+      <a href="#" class="btn-outline-w">Find Your Solution →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENS IN ACTION -->
+<section class="screens-section">
+  <div class="screens-inner">
+    <div class="screens-header">
+      <div class="platform-tag" style="color:var(--teal);">See It in Action</div>
+      <h2 class="platform-h" style="margin-bottom:0;">Purpose-built interfaces for every aspect<br>of behavioral health compliance</h2>
+    </div>
+    <div class="screens-grid">
+      <!-- Compliance Dashboard -->
+      <div class="screen-frame">
+        <div class="screen-topbar"><div class="sdot sdot-r"></div><div class="sdot sdot-y"></div><div class="sdot sdot-g"></div><span class="screen-title-bar">REPrieve — Compliance Dashboard</span></div>
+        <div class="screen-body">
+          <div class="s-lbl">Compliance Overview — All Clear ✓</div>
+          <div class="comp-row"><span class="comp-name">HIPAA Privacy</span><div class="comp-bar-wrap"><div class="comp-fill" style="width:98%;height:100%;background:#34d399;border-radius:2px;"></div></div><span class="comp-pct">98%</span></div>
+          <div class="comp-row"><span class="comp-name">42 CFR Part 2</span><div class="comp-bar-wrap"><div class="comp-fill" style="width:95%;height:100%;background:var(--blue);border-radius:2px;"></div></div><span class="comp-pct">95%</span></div>
+          <div class="comp-row"><span class="comp-name">CARF Standards</span><div class="comp-bar-wrap"><div class="comp-fill" style="width:88%;height:100%;background:#fbbf24;border-radius:2px;"></div></div><span class="comp-pct">88%</span></div>
+          <div class="comp-row"><span class="comp-name">State Licensing</span><div class="comp-bar-wrap"><div class="comp-fill" style="width:100%;height:100%;background:#34d399;border-radius:2px;"></div></div><span class="comp-pct">100%</span></div>
+          <div class="comp-events"><div class="comp-e-lbl">Recent Activity</div><div class="comp-event">Policy review completed</div><div class="comp-event">Audit log exported</div><div class="comp-event">Staff attestation received — 12 new</div></div>
+        </div>
+        <div class="screen-cap"><div class="screen-cap-title">Compliance Monitor →</div><div class="screen-cap-text">Real-time scoring across HIPAA, 42 CFR Part 2, CARF, and state licensing with automated alerts.</div></div>
+      </div>
+      <!-- Workflow -->
+      <div class="screen-frame">
+        <div class="screen-topbar"><div class="sdot sdot-r"></div><div class="sdot sdot-y"></div><div class="sdot sdot-g"></div><span class="screen-title-bar">REPrieve — Workflow Builder</span></div>
+        <div class="screen-body">
+          <div class="s-lbl">Incident Response Workflow</div>
+          <div class="wf-step done">Incident Reported ✓</div><div class="wf-conn">↓</div>
+          <div class="wf-step done">Clinical Supervisor Review ✓</div><div class="wf-conn">↓</div>
+          <div class="wf-step active">Compliance Officer Review ●</div><div class="wf-conn">↓</div>
+          <div class="wf-step">Corrective Action Plan</div><div class="wf-conn">↓</div>
+          <div class="wf-step">Documentation & Closure</div>
+        </div>
+        <div class="screen-cap"><div class="screen-cap-title">Workflow Automation →</div><div class="screen-cap-text">Visual workflow builder with approval chains, conditional logic, and a template library for common processes.</div></div>
+      </div>
+      <!-- Policy Manager -->
+      <div class="screen-frame">
+        <div class="screen-topbar"><div class="sdot sdot-r"></div><div class="sdot sdot-y"></div><div class="sdot sdot-g"></div><span class="screen-title-bar">REPrieve — Policy Manager</span></div>
+        <div class="screen-body">
+          <div class="s-lbl">Active Policies — 42 Total</div>
+          <div class="pol-row"><span style="font-size:14px;">📄</span><div><div class="pol-name">HIPAA Privacy Policy</div><div class="pol-meta">v4.2 · Reviewed Jan 2026 · 47 attestations</div></div><span class="pol-status ps-ok">Current</span></div>
+          <div class="pol-row"><span style="font-size:14px;">📄</span><div><div class="pol-name">42 CFR Part 2 — Consent</div><div class="pol-meta">v3.1 · Reviewed Dec 2025 · 47 attestations</div></div><span class="pol-status ps-ok">Current</span></div>
+          <div class="pol-row"><span style="font-size:14px;">📄</span><div><div class="pol-name">Grievance & Appeals Policy</div><div class="pol-meta">v2.8 · Due for review · Flagged by AI</div></div><span class="pol-status ps-due">Review Due</span></div>
+          <div class="pol-row"><span style="font-size:14px;">📄</span><div><div class="pol-name">Incident Reporting SOP</div><div class="pol-meta">v5.0 · Reviewed Feb 2026 · 47 attestations</div></div><span class="pol-status ps-ok">Current</span></div>
+        </div>
+        <div class="screen-cap"><div class="screen-cap-title">Policy Guardian →</div><div class="screen-cap-text">AI-monitored policy library with version control, staff attestation tracking, and regulatory alignment.</div></div>
+      </div>
+      <!-- Evidence Library -->
+      <div class="screen-frame">
+        <div class="screen-topbar"><div class="sdot sdot-r"></div><div class="sdot sdot-y"></div><div class="sdot sdot-g"></div><span class="screen-title-bar">REPrieve — Evidence Library</span></div>
+        <div class="screen-body">
+          <div class="s-lbl">CARF Accreditation Package — 2026</div>
+          <div class="evid-row"><div class="evid-type">CARF</div><div class="evid-name">Governance & Leadership Documents</div><div class="evid-count">24 files</div></div>
+          <div class="evid-row"><div class="evid-type">HIPAA</div><div class="evid-name">Privacy & Security Training Logs</div><div class="evid-count">12 files</div></div>
+          <div class="evid-row"><div class="evid-type">QM</div><div class="evid-name">QI Meeting Minutes — 2025</div><div class="evid-count">8 files</div></div>
+          <div class="evid-row"><div class="evid-type">HR</div><div class="evid-name">Staff Credential Records</div><div class="evid-count">47 files</div></div>
+          <div class="evid-row"><div class="evid-type">STATE</div><div class="evid-name">AHCCCS Licensing Documentation</div><div class="evid-count">6 files</div></div>
+        </div>
+        <div class="screen-cap"><div class="screen-cap-title">Evidence Librarian →</div><div class="screen-cap-text">AI-organized evidence mapped to accreditation standards — your audit package is always ready to go.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="hiw">
+  <div class="hiw-inner">
+    <div style="text-align:center;max-width:600px;margin:0 auto;">
+      <div class="sec-tag">How It Works</div>
+      <h2 class="sec-h">From onboarding to audit-ready in 30 days</h2>
+      <p class="sec-sub" style="margin:0 auto;">A simple, structured process that gets your compliance program running — and keeps it that way continuously.</p>
+    </div>
+    <div class="hiw-steps">
+      <div class="hiw-step"><div class="hiw-num">1</div><div class="hiw-title">Compliance Assessment</div><div class="hiw-desc">We audit your current policies, workflows, and systems to identify gaps across every applicable framework.</div></div>
+      <div class="hiw-step"><div class="hiw-num">2</div><div class="hiw-title">Platform Configuration</div><div class="hiw-desc">We configure REPrieve to your organization — loading your policies, mapping workflows, and setting up AI agent rules.</div></div>
+      <div class="hiw-step"><div class="hiw-num">3</div><div class="hiw-title">Team Onboarding</div><div class="hiw-desc">Role-based training for clinical, compliance, and operations staff. Average onboarding time: 3 days.</div></div>
+      <div class="hiw-step"><div class="hiw-num">4</div><div class="hiw-title">Ongoing AI Monitoring</div><div class="hiw-desc">Your AI agents run continuously — monitoring regulatory changes, flagging gaps, and keeping you perpetually audit-ready.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY REPRIEVE -->
+<section class="why">
+  <div class="why-inner">
+    <div class="sec-tag">Why REPrieve</div>
+    <h2 class="sec-h">Built for behavioral health.<br>Not bolted on.</h2>
+    <p class="sec-sub">Generic compliance software doesn't speak behavioral health. REPrieve was designed from the ground up for the specific regulatory landscape Arizona providers navigate every day.</p>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-icon">🎯</div><div class="why-title">Behavioral Health-Native</div><div class="why-desc">Purpose-built for SUD treatment, mental health, and recovery housing. Every framework, form, and workflow maps to the regulatory environment you actually live in — not a generic healthcare template.</div></div>
+      <div class="why-card"><div class="why-icon">🤖</div><div class="why-title">AI Agents That Actually Work</div><div class="why-desc">REPrieve's agents don't just surface information — they take action. Drafting policy updates, generating audit packages, flagging credential expirations, and keeping your team one step ahead of every review cycle.</div></div>
+      <div class="why-card"><div class="why-icon">🔌</div><div class="why-title">Works With Your Existing Stack</div><div class="why-desc">You don't have to rip and replace your EHR or billing system. REPrieve adds an AI compliance intelligence layer on top of what you already have — so you get the benefit without the disruption.</div></div>
+      <div class="why-card"><div class="why-icon">🔒</div><div class="why-title">Compliance Built Into Every Layer</div><div class="why-desc">HIPAA, 42 CFR Part 2, SOC 2, and AHCCCS safeguards baked into the architecture. Every log, every access event, every document change is tracked and auditable.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="results">
+  <div class="results-inner">
+    <div style="text-align:center;"><div class="sec-tag">Proven Results</div><h2 class="sec-h">Compliance outcomes that move the needle</h2></div>
+    <div class="results-grid">
+      <div class="result-card"><div class="result-num">90%</div><div class="result-label">Faster Audit Preparation</div><div class="result-org">Cholla Behavioral Health →</div></div>
+      <div class="result-card"><div class="result-num">100%</div><div class="result-label">CARF Accreditation Maintained</div><div class="result-org">Sanctuary Recovery Centers →</div></div>
+      <div class="result-card"><div class="result-num">3×</div><div class="result-label">Faster Policy Review Cycle</div><div class="result-org">Desert Hope Network →</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi">
+  <div class="testi-inner">
+    <div style="text-align:center;"><div class="sec-tag">What Partners Say</div><h2 class="sec-h">From operators who lived the problem</h2></div>
+    <div class="testi-grid">
+      <div class="testi-card"><div class="testi-q">"</div><p class="testi-text">REPrieve turned our CARF prep from a three-month scramble into a continuous process. We walked into our last review with everything organized — no panic, no all-nighters.</p><div class="testi-author">Dr. Maria Ruiz</div><div class="testi-role">Chief Clinical Officer, Cholla Behavioral Health</div></div>
+      <div class="testi-card"><div class="testi-q">"</div><p class="testi-text">The 42 CFR Part 2 module alone justified the entire platform. We used to lose sleep over consent tracking. Now it's automated, documented, and audit-ready at all times.</p><div class="testi-author">James Ortega</div><div class="testi-role">VP of Operations, Sanctuary Recovery Centers</div></div>
+      <div class="testi-card"><div class="testi-q">"</div><p class="testi-text">We were managing compliance across four locations in spreadsheets. REPrieve gave us one dashboard across all sites. Policy Guardian alone saves us 10+ hours a month.</p><div class="testi-author">Sandra Cole</div><div class="testi-role">Executive Director, Desert Hope Network</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-inner">
+    <div class="cta-box">
+      <div style="position:relative;z-index:1;">
+        <h2 class="cta-h">Ready to make compliance a<br>competitive advantage?</h2>
+        <p class="cta-sub">See how REPrieve can protect your organization, simplify your audits, and free your clinical team to focus on what matters most — patient care.</p>
+      </div>
+      <div class="cta-actions" style="position:relative;z-index:1;">
+        <a href="#" class="btn-white">Request a Demo <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 6.5h11M7.5 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#" class="btn-ghost">Explore Platform</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><div class="logo-mark">R</div><span class="footer-brand-text">REPrieve</span></div>
+        <p class="footer-desc">The AI Compliance OS for behavioral health and recovery organizations. Built in Arizona, built for behavioral health.</p>
+        <div class="footer-badges"><span class="fbadge">HIPAA</span><span class="fbadge">42 CFR Part 2</span><span class="fbadge">SOC 2</span></div>
+      </div>
+      <div class="footer-col"><h5>Platform</h5><ul><li><a href="#">All Modules</a></li><li><a href="#">Policy Guardian</a></li><li><a href="#">Compliance Monitor</a></li><li><a href="#">Evidence Librarian</a></li><li><a href="#">QM Orchestrator</a></li></ul></div>
+      <div class="footer-col"><h5>Resources</h5><ul><li><a href="#">How It Works</a></li><li><a href="#">Pricing</a></li><li><a href="#">Blog</a></li><li><a href="#">Case Studies</a></li><li><a href="#">Interactive Demo</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="#">About</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div>
+      <div class="footer-col"><h5>Get Started</h5><ul><li><a href="#">Request a Demo</a></li><li><a href="#">Migration Process</a></li><li><a href="#">Buyer's Guide</a></li><li><a href="#">Contact Sales</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 REPrieve AI, Inc. All rights reserved. · Phoenix, Arizona</span>
+      <span>Built by behavioral health operators, for behavioral health operators.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
